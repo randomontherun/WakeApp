@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include "PacketSender.h"
 #include <iostream>
+#include <sstream>
 
 #pragma comment(lib, "ws2_32.lib")
 
@@ -30,11 +31,35 @@ bool PacketSender::sendMagicPacket(const std::string &macAddress) {
         return false;
     }
 
+    // Enable broadcast option on the socket
+    BOOL broadcast = TRUE;
+    if (setsockopt(udpsocket, SOL_SOCKET, SO_BROADCAST, reinterpret_cast<char*>(&broadcast),
+        sizeof(broadcast)) == SOCKET_ERROR) {
+        closesocket(udpsocket);
+        WSACleanup();
+        std::cerr << "Error setting socket option";
+        return false;
+    }
+
     // Construct sockaddr_in structure for broadcast address
     sockaddr_in dest_addr;
     dest_addr.sin_family = AF_INET;
     dest_addr.sin_port = htons(9);
     dest_addr.sin_addr.s_addr = htonl(INADDR_BROADCAST);
 
+    // Construct magic packet
+    std::ostringstream packetStream;
+    // Add 6 byte preamble
+    packetStream << std::string(6, '\xFF');
+    // Repeat MAC address 16 times
+    for (int i = 0; i < 16; i++) {
+        std::istringstream macStream(macAddress);
+        unsigned int macByte;
+        while (macStream >> std::hex >> macByte) {
+            packetStream << static_cast<unsigned char>(macByte);
+            if (macStream.peek() == ':') macStream.ignore();
+        }
+    }
+    std::string magicPacket = packetStream.str();
 }
 
