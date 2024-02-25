@@ -71,7 +71,7 @@ build CMakeFiles/WOL_Interface.dir/PacketSender.cpp.obj: CXX_COMPILER__WOL_Inter
 
 build WOL_Interface.exe: CXX_EXECUTABLE_LINKER__WOL_Interface_Debug CMakeFiles/WOL_Interface.dir/main.cpp.obj CMakeFiles/WOL_Interface.dir/PacketSender.cpp.obj
   FLAGS = -g
-  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = -lws2_32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\WOL_Interface.dir
   POST_BUILD = cd .
   PRE_LINK = cd .

@@ -7,3 +7,4 @@ add_executable(WOL_Interface main.cpp
         PacketSender.cpp
         PacketSender.h
 )
+target_link_libraries(WOL_Interface PRIVATE ws2_32)

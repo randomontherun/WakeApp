@@ -75,6 +75,8 @@ bool PacketSender::sendMagicPacket(const std::string &macAddress) {
     closesocket(udpsocket);
     WSACleanup();
 
+    std::cout << "packet sent\n";
+
     return true; // Packet sent successfully
 }
 
