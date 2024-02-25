@@ -19,7 +19,7 @@ bool PacketSender::sendMagicPacket(const std::string &macAddress) {
     // Initialize Winsock
     WSADATA wsaData;
     if (WSAStartup(MAKEWORD(2,2), &wsaData) != 0) {
-        std::cerr << "Error initializing Winsock\n";
+        std::cerr << "Error initializing Winsock" << std::endl;
         return false;
     }
 
@@ -27,7 +27,7 @@ bool PacketSender::sendMagicPacket(const std::string &macAddress) {
     SOCKET udpsocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     if (udpsocket == INVALID_SOCKET) {
         WSACleanup();
-        std::cerr << "Error creating socket\n";
+        std::cerr << "Error creating socket" << std::endl;
         return false;
     }
 
@@ -37,7 +37,7 @@ bool PacketSender::sendMagicPacket(const std::string &macAddress) {
         sizeof(broadcast)) == SOCKET_ERROR) {
         closesocket(udpsocket);
         WSACleanup();
-        std::cerr << "Error setting socket option";
+        std::cerr << "Error setting socket option" << std::endl;
         return false;
     }
 
@@ -68,7 +68,7 @@ bool PacketSender::sendMagicPacket(const std::string &macAddress) {
     if (bytesSent == SOCKET_ERROR) {
         closesocket((udpsocket));
         WSACleanup();
-        std::cerr << 'Error sending magic packet';
+        std::cerr << 'Error sending magic packet' << std::endl;
         return false;
     }
 
