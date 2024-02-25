@@ -12,6 +12,5 @@ int main() {
     PacketSender packetSender;
     packetSender.sendMagicPacket(macAddress);
 
-    std::cout << "a8:a1:59:ea:d7:63"<< std::endl;
     return 0;
 }
