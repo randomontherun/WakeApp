@@ -42,10 +42,10 @@ bool PacketSender::sendMagicPacket(const std::string &macAddress) {
     }
 
     // Construct sockaddr_in structure for broadcast address
-    sockaddr_in dest_addr;
-    dest_addr.sin_family = AF_INET;
-    dest_addr.sin_port = htons(9);
-    dest_addr.sin_addr.s_addr = htonl(INADDR_BROADCAST);
+    sockaddr_in destAddr;
+    destAddr.sin_family = AF_INET;
+    destAddr.sin_port = htons(9);
+    destAddr.sin_addr.s_addr = htonl(INADDR_BROADCAST);
 
     // Construct magic packet
     std::ostringstream packetStream;
@@ -61,5 +61,20 @@ bool PacketSender::sendMagicPacket(const std::string &macAddress) {
         }
     }
     std::string magicPacket = packetStream.str();
+
+    // Send magic packet
+    int bytesSent = sendto(udpsocket, magicPacket.c_str(), magicPacket.size(), 0,
+        reinterpret_cast<sockaddr*>(&destAddr), sizeof(destAddr));
+    if (bytesSent == SOCKET_ERROR) {
+        closesocket((udpsocket));
+        WSACleanup();
+        std::cerr << 'Error sending magic packet';
+        return false;
+    }
+
+    closesocket(udpsocket);
+    WSACleanup();
+
+    return true; // Packet sent successfully
 }
 
