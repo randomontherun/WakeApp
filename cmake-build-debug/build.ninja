@@ -61,6 +61,12 @@ build CMakeFiles/WOL_Interface.dir/PacketSender.cpp.obj: CXX_COMPILER__WOL_Inter
   OBJECT_DIR = CMakeFiles\WOL_Interface.dir
   OBJECT_FILE_DIR = CMakeFiles\WOL_Interface.dir
 
+build CMakeFiles/WOL_Interface.dir/UI.cpp.obj: CXX_COMPILER__WOL_Interface_unscanned_Debug C$:/Users/richa/CLionProjects/WOL-Interface/UI.cpp || cmake_object_order_depends_target_WOL_Interface
+  DEP_FILE = CMakeFiles\WOL_Interface.dir\UI.cpp.obj.d
+  FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\WOL_Interface.dir
+  OBJECT_FILE_DIR = CMakeFiles\WOL_Interface.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target WOL_Interface
@@ -69,7 +75,7 @@ build CMakeFiles/WOL_Interface.dir/PacketSender.cpp.obj: CXX_COMPILER__WOL_Inter
 #############################################
 # Link the executable WOL_Interface.exe
 
-build WOL_Interface.exe: CXX_EXECUTABLE_LINKER__WOL_Interface_Debug CMakeFiles/WOL_Interface.dir/main.cpp.obj CMakeFiles/WOL_Interface.dir/PacketSender.cpp.obj
+build WOL_Interface.exe: CXX_EXECUTABLE_LINKER__WOL_Interface_Debug CMakeFiles/WOL_Interface.dir/main.cpp.obj CMakeFiles/WOL_Interface.dir/PacketSender.cpp.obj CMakeFiles/WOL_Interface.dir/UI.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lws2_32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\WOL_Interface.dir

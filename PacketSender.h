@@ -12,6 +12,8 @@ public:
     PacketSender();
     ~PacketSender();
 
+    std::string macAddress;
+
     bool sendMagicPacket(const std::string& macAddress);
 };
 
